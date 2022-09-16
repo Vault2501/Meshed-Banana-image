@@ -18,7 +18,7 @@ Based on the instructions on [how to build Armbian images](https://docs.armbian.
 
 - Boot the image in your hypervisor
 
-- Login to the booted system and install the Armbian build system
+- Login to the booted system and install the [Armbian build system](https://github.com/armbian/build)
 
   ```bash
   cd ~
