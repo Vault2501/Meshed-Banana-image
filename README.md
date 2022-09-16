@@ -3,7 +3,7 @@
 Scripts for preparing an Armbian image with the [reticulum stack](https://github.com/markqvist/Reticulum) and its tools/examples
 
 ## How does it work?
-This repo contains an overlay directory to be used within the Armbian build system. It will install the reticulum stack and its dependencies in `/etc/skel` of the built image, so that every user that gets created will have those copied to his home directory upon first login.
+This repo contains an overlay directory to be used within the Armbian build system. It will copy the reticulum stack and its dependencies to `/opt/reticulum_env/` and add a modified `.profile` to `/etc/skel` of the built image, so that every user that gets created will have those copied to his home directory upon first login.
 
 ## How can I use it?
 
