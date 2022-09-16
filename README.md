@@ -24,7 +24,7 @@ git clone https://github.com/armbian/build
 cd build
 ```
 
-- Run a test build without any modifications to make sure all works
+- Run a test build without any modifications to make sure all works and to get the `userpatches directory created`
 ```
 ./compile.sh  \
         BOARD=bananapim2zero \
@@ -70,3 +70,7 @@ Note:
 
 ## Test the image
 TBD
+
+## FAQ
+Q: I don't have a userpatches directory?<br>
+A: Do a unmodified build first to create it.
