@@ -21,8 +21,6 @@ ${SCRIPTS}/install_required_packages.sh
 # Install latest rust
 sudo -u ${USER} -H ${SCRIPTS}/install_rust.sh
 
-bash
-
 # Install python modules
 sudo -u ${USER} -H bash -e ${SCRIPTS}/install_python_modules.sh
 
