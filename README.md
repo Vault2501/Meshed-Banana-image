@@ -18,6 +18,7 @@ wget https://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-
 
 - Login to the booted system and install the Armbian build system
 ```
+cd ~
 apt-get -y install git
 git clone https://github.com/armbian/build
 cd build
@@ -40,7 +41,10 @@ cd build
 
 - Install the overlay files from this repo inside the `build` directory
 ```
+cd ~
 git clone https://github.com/Vault2501/Meshed-Banana-image.git
+cp -r Meshed-Banana-image/userpatches build
+cd build
 ```
 
 - Add `run_scripts.sh` to `userpatches/customize-image.sh`
