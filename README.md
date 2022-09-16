@@ -11,41 +11,46 @@ This repo contains an overlay directory to be used within the Armbian build syst
 Based on the instructions on [how to build Armbian images](https://docs.armbian.com/Developer-Guide_Build-Preparation/) given
 
 - Download a [Ubuntu Jammy image](https://cloud-images.ubuntu.com/releases/22.04/release/) for the hypervisor of your choice (in my case kvm)
-```
-wget https://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-cloudimg-amd64-disk-kvm.img
-```
+
+  ```bash
+  wget https://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-cloudimg-amd64-disk-kvm.img
+  ```
+
 - Boot the image in your hypervisor
 
 - Login to the booted system and install the Armbian build system
-```
-cd ~
-apt-get -y install git
-git clone https://github.com/armbian/build
-cd build
-```
+
+  ```bash
+  cd ~
+  apt-get -y install git
+  git clone https://github.com/armbian/build
+  cd build
+  ```
 
 - Run a test build without any modifications to make sure all works and to get the `userpatches directory created`
-```
-./compile.sh  \
-        BOARD=bananapim2zero \
-        BRANCH=current \
-        RELEASE=bullseye \
-        BUILD_MINIMAL=yes \
-        BUILD_DESKTOP=no \
-        KERNEL_ONLY=no \
-        KERNEL_CONFIGURE=no \
-        COMPRESS_OUTPUTIMAGE=sha,gpg,img
-```
+
+  ```bash
+  ./compile.sh  \
+      BOARD=bananapim2zero \
+      BRANCH=current \
+      RELEASE=bullseye \
+      BUILD_MINIMAL=yes \
+      BUILD_DESKTOP=no \
+      KERNEL_ONLY=no \
+      KERNEL_CONFIGURE=no \
+      COMPRESS_OUTPUTIMAGE=sha,gpg,img
+  ```
 
 ### Add Meshed Banana customisation on top
 
 - Install the overlay files from this repo inside the `build` directory
-```
-cd ~
-git clone https://github.com/Vault2501/Meshed-Banana-image.git
-cp -r Meshed-Banana-image/userpatches build
-cd build
-```
+
+  ```bash
+  cd ~
+  git clone https://github.com/Vault2501/Meshed-Banana-image.git
+  cp -r Meshed-Banana-image/userpatches build
+  cd build
+  ```
 
 - Add `run_scripts.sh` to `userpatches/customize-image.sh`
 You need to add it to the section of the selected RELEASE you want to build. Please see `userpatches/customize-image.sh_example` on how to add it e.g. to buster and bullseye builds
@@ -56,21 +61,21 @@ Note:
   - if you change `RELEASE`, make sure you have `run_scripts.sh` added accordingly
   - changing `BRANCH` might make reticuum not work due to different device names
 
-```
-./compile.sh  \
-        BOARD=bananapim2zero \
-        BRANCH=current \
-        RELEASE=bullseye \
-        BUILD_MINIMAL=yes \
-        BUILD_DESKTOP=no \
-        KERNEL_ONLY=no \
-        KERNEL_CONFIGURE=no \
-        COMPRESS_OUTPUTIMAGE=sha,gpg,img
-```
+  ```bash
+  ./compile.sh  \
+      BOARD=bananapim2zero \
+      BRANCH=current \
+      RELEASE=bullseye \
+      BUILD_MINIMAL=yes \
+      BUILD_DESKTOP=no \
+      KERNEL_ONLY=no \
+      KERNEL_CONFIGURE=no \
+      COMPRESS_OUTPUTIMAGE=sha,gpg,img
+  ```
 
 ## Test the image
 TBD
 
 ## FAQ
-Q: I don't have a userpatches directory?<br>
-A: Do a unmodified build first to create it.
+**Q:** I don't have a userpatches directory?<br>
+**A:** Do a unmodified build first to create it.
