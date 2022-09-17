@@ -97,8 +97,13 @@ To install reticulum on an existing image, use the following instructions.
   ```
 
 - Run the scripts
+
+  Notes:
+  - Set `BOARD` other than `bananapim2zero`to not get the bPi zero specific changes
+  - Currently the required group gets not set for new users, this needs to be done manually
+  - `.profile` ins /etc/skel gets overwritten with a modified one
   ```
-  sudo ./Meshed-Banana-image/userpatches/overlay/run_scripts.sh
+  sudo BOARD=bananapim2zero ./Meshed-Banana-image/userpatches/overlay/run_scripts.sh
   ```
 
 ## Test the Image
