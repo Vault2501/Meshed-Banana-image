@@ -2,17 +2,27 @@
 A collection of scripts for preparing an Armbian image with the [reticulum stack](https://github.com/markqvist/Reticulum) and its tools/examples.
 They are used to buld the images for the [Meshed Banana LoRa Device](https://github.com/Vault2501/Meshed-Banana-Device)
 
-## How does it work?
+# Table of contents
+- [How does it work](https://github.com/Vault2501/Meshed-Banana-image#how-does-it-work)
+- [How can I use it](https://github.com/Vault2501/Meshed-Banana-image#how-can-i-use-it)
+  - [Build a Modified Armbian Image with it](https://github.com/Vault2501/Meshed-Banana-image#build-a-modified-armbian-image-with-it)
+    - [Install the Armbian Build System](https://github.com/Vault2501/Meshed-Banana-image#install-the-armbian-build-bystem)
+    - [Add the Meshed Banana Customisation](https://github.com/Vault2501/Meshed-Banana-image#add-the-meshed-banana-customisation)
+  - [Run Scripts on Installed Debian Based System](https://github.com/Vault2501/Meshed-Banana-image#run-scripts-on-installed-debian-based-system)
+- [Test the Image](https://github.com/Vault2501/Meshed-Banana-image#test-the-image)
+- [FAQ](https://github.com/Vault2501/Meshed-Banana-image#faq)
+
+## How does it work
 This repo contains an overlay directory with bash scripts to be used within the Armbian build system or on an already installed image.<br>
 The scripts will copy the reticulum stack and its dependencies to `/opt/reticulum_env/` and add a modified `.profile` to `/etc/skel`, so that every user that gets created will have those copied to his home directory upon first login.
 
-## How can I use it?
+## How can I use it
 You can run the scripts either by themself in an installed system to install the latest version of reticulum or add the scripts to the Armbian build system in order to create images with reticulum installed.
 
 ### Build a Modified Armbian Image with it
 To use the scripts within the Armbian build system to create Armbian images with reticulum installed, follow the instructions in this section.
 
-#### 1. Install the Armbian Build Bystem
+#### Install the Armbian Build Bystem
 Based on the instructions on [how to build Armbian images](https://docs.armbian.com/Developer-Guide_Build-Preparation/):
 
 - Download a [Ubuntu Jammy image](https://cloud-images.ubuntu.com/releases/22.04/release/) for the hypervisor of your choice (in my case kvm)
@@ -49,7 +59,7 @@ Based on the instructions on [how to build Armbian images](https://docs.armbian.
       COMPRESS_OUTPUTIMAGE=sha,gpg,img
   ```
 
-#### 2. Add the Meshed Banana Customisation to the Build System
+#### Add the Meshed Banana Customisation
 
 - Install the overlay files from this repo inside the `build` directory
 
@@ -83,7 +93,7 @@ Based on the instructions on [how to build Armbian images](https://docs.armbian.
       COMPRESS_OUTPUTIMAGE=sha,gpg,img
   ```
 
-### Run Scripts on Installed Debian or Ubuntu Based System
+### Run Scripts on Installed Debian Based System
 To install reticulum on an existing image, use the following instructions.
 
 - Install git
