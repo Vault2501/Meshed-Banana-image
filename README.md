@@ -8,8 +8,11 @@ They are used to buld the images for the [Meshed Banana LoRa Device](https://git
   - [Build a Modified Armbian Image with it](https://github.com/Vault2501/Meshed-Banana-image#build-a-modified-armbian-image-with-it)
     - [Install the Armbian Build System](https://github.com/Vault2501/Meshed-Banana-image#install-the-armbian-build-bystem)
     - [Add the Meshed Banana Customisation](https://github.com/Vault2501/Meshed-Banana-image#add-the-meshed-banana-customisation)
+    - [First Image Boot](https://github.com/Vault2501/Meshed-Banana-image##first-image-boot)
   - [Run Scripts on Installed Debian Based System](https://github.com/Vault2501/Meshed-Banana-image#run-scripts-on-installed-debian-based-system)
-- [Test the Image](https://github.com/Vault2501/Meshed-Banana-image#test-the-image)
+    - [Install Requirements and run Scripts](https://github.com/Vault2501/Meshed-Banana-image#install-requirements-and-run-scripts)
+    - [Copying the Environment for an Existing User](https://github.com/Vault2501/Meshed-Banana-image#copying-the-environment-for-an-existing-user)
+- [Creating new Users](https://github.com/Vault2501/Meshed-Banana-image#creating-new-users)
 - [FAQ](https://github.com/Vault2501/Meshed-Banana-image#faq)
 
 ## How does it work
@@ -145,5 +148,5 @@ adduser USERNAME
 **Q:** I don't have a userpatches directory?<br>
 **A:** Do a unmodified build first to create it.
 
-**Q** The user I created can start reticulum, but then I get a permission denied error
+**Q** The user I created can start reticulum, but then I get a permission denied error<br>
 **A** Make sure the user is created using `adduser`
