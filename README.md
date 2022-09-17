@@ -98,7 +98,7 @@ Upon first boot, Armbian provides a setup process for configuring the root passw
 
 Here an example of the Armbian first boot
 
-<insert video here>
+![](https://raw.githubusercontent.com/wiki/Vault2501/Meshed-Banana-image/images/bpi_zero_bootup_new.GIF)
 
 ### Run Scripts on Installed Debian Based System
 If you already have an image, and want to add the reticulum environment, you can also run the scripts outside the Armbian build system.
