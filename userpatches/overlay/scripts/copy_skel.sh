@@ -17,10 +17,10 @@ rm -rf /opt/reticulum_env/.cache/ /opt/reticulum_env/.cargo/registry/src/
 
 # add section to default .profile to copy env on first login
 cat >> /etc/skel/.profile <<EOF
-if [ -e $HOME/.not_logged_in_yet ]; then
+if [ -e \$HOME/.not_logged_in_yet ]; then
     echo Copying reticulum environment
-    cp -r /opt/reticulum_env/. $HOME
-    rm $HOME/.not_logged_in_yet
+    cp -r /opt/reticulum_env/. \$HOME
+    rm \$HOME/.not_logged_in_yet
 fi
 EOF
 
