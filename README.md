@@ -7,13 +7,13 @@ This repo contains an overlay directory with bash scripts to be used within the 
 The scripts will copy the reticulum stack and its dependencies to `/opt/reticulum_env/` and add a modified `.profile` to `/etc/skel`, so that every user that gets created will have those copied to his home directory upon first login.
 
 ## How can I use it?
-You can run the script either by themself in an installed system to install the latest version of reticulum or add the scripts to the Armbian build system in order to create images with reticulum installed.
+You can run the scripts either by themself in an installed system to install the latest version of reticulum or add the scripts to the Armbian build system in order to create images with reticulum installed.
 
 ### Build a Modified Armbian Image with it
 To use the scripts within the Armbian build system to create Armbian images with reticulum installed, follow the instructions in this section.
 
-#### Install the Armbian Build Bystem
-Based on the instructions on [how to build Armbian images](https://docs.armbian.com/Developer-Guide_Build-Preparation/) given:
+#### 1. Install the Armbian Build Bystem
+Based on the instructions on [how to build Armbian images](https://docs.armbian.com/Developer-Guide_Build-Preparation/):
 
 - Download a [Ubuntu Jammy image](https://cloud-images.ubuntu.com/releases/22.04/release/) for the hypervisor of your choice (in my case kvm)
 
@@ -22,6 +22,9 @@ Based on the instructions on [how to build Armbian images](https://docs.armbian.
   ```
 
 - Boot the image in your hypervisor
+  Minimum system requirements:
+  - Disk size: 60GB
+  - Ram: 8GB 
 
 - Login to the booted system and install the [Armbian build system](https://github.com/armbian/build)
 
@@ -32,7 +35,7 @@ Based on the instructions on [how to build Armbian images](https://docs.armbian.
   cd build
   ```
 
-- Run a test build without any modifications to make sure all works and to get the `userpatches directory created`
+- Run a test build without any modifications to make sure all works and to get the `userpatches` directory created
 
   ```bash
   ./compile.sh  \
@@ -46,7 +49,7 @@ Based on the instructions on [how to build Armbian images](https://docs.armbian.
       COMPRESS_OUTPUTIMAGE=sha,gpg,img
   ```
 
-#### Add the Meshed Banana Customisation to the Build System
+#### 2. Add the Meshed Banana Customisation to the Build System
 
 - Install the overlay files from this repo inside the `build` directory
 
@@ -58,7 +61,8 @@ Based on the instructions on [how to build Armbian images](https://docs.armbian.
   ```
 
 - Add `run_scripts.sh` to `userpatches/customize-image.sh`
-You need to add it to the section of the selected RELEASE you want to build. Please see `userpatches/customize-image.sh_example` on how to add it e.g. to buster and bullseye builds
+
+  You need to add it to the section of the selected RELEASE you want to build. Please see `userpatches/customize-image.sh_example` on how to add it e.g. to buster and bullseye builds
 
 - Build again with the overlay added.
 
@@ -80,7 +84,7 @@ You need to add it to the section of the selected RELEASE you want to build. Ple
   ```
 
 ### Run Scripts on Installed Debian or Ubuntu Based System
-To install reticulum on an existin image, use the following instructions:
+To install reticulum on an existing image, use the following instructions.
 
 - Install git
   ```
