@@ -14,7 +14,7 @@ They are used to buld the images for the [Meshed Banana LoRa Device](https://git
 
 ## How does it work
 This repo contains an overlay directory with bash scripts to be used within the Armbian build system or on an already installed image.<br>
-The scripts will copy the reticulum stack and its dependencies to `/opt/reticulum_env/` and add a modified `.profile` to `/etc/skel`, so that every user that gets created will have those copied to his home directory upon first login.
+The scripts will copy the reticulum stack and its dependencies to `/opt/reticulum_env/` and modifies `/etc/skel/.profile`, so that every user that gets created will have those copied to his home directory upon first login.
 
 ## How can I use it
 You can run the scripts either by themself in an installed system to install the latest version of reticulum or add the scripts to the Armbian build system in order to create images with reticulum installed.
@@ -93,7 +93,17 @@ Based on the instructions on [how to build Armbian images](https://docs.armbian.
       COMPRESS_OUTPUTIMAGE=sha,gpg,img
   ```
 
+#### First Image Boot
+Upon first boot, Armbian provides a setup process for configuring the root password, as well creating a user and connecting to wifi. After this setup is finished, logout and login as the newly created user. At this first login, the reticulum files are copied into the users home. After that, please logout and login again, to have the reticulum binaries in your `PATH`.
+
+Here an example of the Armbian first boot
+
+<insert video here>
+
 ### Run Scripts on Installed Debian Based System
+If you already have an image, and want to add the reticulum environment, you can also run the scripts outside the Armbian build system.
+
+#### Install Requirements and run Scripts
 To install reticulum on an existing image, use the following instructions.
 
 - Install git
@@ -116,9 +126,24 @@ To install reticulum on an existing image, use the following instructions.
   sudo BOARD=bananapim2zero ./Meshed-Banana-image/userpatches/overlay/run_scripts.sh
   ```
 
-## Test the Image
-TBD
+
+#### Copying the Environment for an Existing User
+If you want to add the reticulum environment for an existing user, please run the following comand:
+```
+cp -r /opt/reticulum_env/. $HOME
+```
+After that, you should be able to directly use the reticulum binaries.
+
+
+### Creating new Users
+If you create a new user that should be setup to use reticulum, you need to use the `adduser` command and **NOT** `useradd`, as the latter won't add the user to required groups. So in order to create new users with everything prepared run this command:
+```
+adduser USERNAME
+```
 
 ## FAQ
 **Q:** I don't have a userpatches directory?<br>
 **A:** Do a unmodified build first to create it.
+
+**Q** The user I created can start reticulum, but then I get a permission denied error
+**A** Make sure the user is created using `adduser`
