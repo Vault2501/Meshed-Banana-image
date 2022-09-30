@@ -1,0 +1,19 @@
+127.0.0.1   localhost
+127.0.1.1   banana banana.meshed ubuntu 
+::1         localhost bananapim2zero ip6-localhost ip6-loopback
+fe00::0     ip6-localnet
+ff00::0     ip6-mcastprefix
+ff02::1     ip6-allnodes
+ff02::2     ip6-allrouters
+192.168.1.1 banana banana.meshed
+192.168.1.10 client01 client01.meshed 
+192.168.1.11 client02 client02.meshed 
+192.168.1.12 client03 client03.meshed 
+192.168.1.13 client04 client04.meshed 
+192.168.1.14 client05 client05.meshed 
+192.168.1.15 client06 client06.meshed 
+192.168.1.16 client07 client07.meshed 
+192.168.1.17 client08 client08.meshed 
+192.168.1.18 client09 client09.meshed 
+192.168.1.19 client10 client10.meshed 
+192.168.1.20 client11 client11.meshed

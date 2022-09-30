@@ -24,7 +24,7 @@ Main() {
 			# InstallOpenMediaVault # uncomment to get an OMV 4 image
 			;;
 		buster)
-			/tmp/overlay/run_scripts.sh
+			# your code here
 			;;
 		bullseye)
 			# your code here
@@ -36,8 +36,8 @@ Main() {
 		focal)
 			# your code here
 			;;
-		hirsute)
-
+		jammy)
+			/tmp/overlay/run_scripts.sh
 			;;
 	esac
 } # Main
@@ -146,7 +146,7 @@ InstallOpenMediaVault() {
 	sed -i '/stretch-backports/d' /etc/apt/sources.list
 
 	# rootfs resize to 7.3G max and adding omv-initsystem to firstrun -- q&d but shouldn't matter
-	echo 15500000s >/root/.rootfs_resize
+	echo 20000000s >/root/.rootfs_resize
 	sed -i '/systemctl\ disable\ armbian-firstrun/i \
 	mv /usr/bin/newaliases.bak /usr/bin/newaliases \
 	export DEBIAN_FRONTEND=noninteractive \

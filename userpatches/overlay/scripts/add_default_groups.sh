@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo "\nRunning ${0}\n"
 
-echo "EXTRA_GROUPS=\"dialout cdrom floppy audio video plugdev users sudo\"" >> /etc/adduser.conf
+GROUPS=${1:-"dialout cdrom floppy audio video plugdev users sudo"}
+
+echo "EXTRA_GROUPS=\"${GROUPS}\"" >> /etc/adduser.conf
 echo "ADD_EXTRA_GROUPS=1" >> /etc/adduser.conf

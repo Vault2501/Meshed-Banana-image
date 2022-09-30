@@ -1,0 +1,10 @@
+[Unit]
+Description=RNS Server
+
+[Service]
+Type=simple
+User=__USER__
+ExecStart=/home/__USER__/.local/bin/rnsd
+
+[Install]
+WantedBy=multi-user.target
