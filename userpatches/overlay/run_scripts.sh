@@ -4,13 +4,14 @@ echo "Running custom image scripts"
 
 
 SCRIPT_DIR=$(dirname "$0")
-#. ${SCRIPT_DIR}/image.config
+. ${SCRIPT_DIR}/image.config
 
 SCRIPTS="${SCRIPT_DIR}/scripts"
 USER="${DEFAULT_USER:=nomad}"
 BOARD="${BOARD:=bananapim2zero}"
 
-echo $BOARD
+echo Board: ${BOARD}
+echo User: ${USER}
 
 # Add user
 ${SCRIPTS}/create_user.sh ${USER}
@@ -31,10 +32,15 @@ sudo -u ${USER} -H bash -e ${SCRIPTS}/install_python_modules.sh
 sudo -u ${USER} -H ${SCRIPTS}/install_rns_config.sh ${BOARD}
 
 # Copy the user dir to skel to make it available for new users
-#${SCRIPTS}/copy_skel.sh ${USER}
+if [ ${COPYSKEL} = "true" ]; then
+    ${SCRIPTS}/copy_skel.sh ${USER}
+fi
+
 
 # Remove user again
-#${SCRIPTS}/remove_user.sh ${USER}
+if [ ${REMOVEUSER} = "true" ]; then
+    ${SCRIPTS}/remove_user.sh ${USER}
+fi
 
 # Add default groups to newly created users
 ${SCRIPTS}/add_default_groups.sh
@@ -47,17 +53,21 @@ ${SCRIPTS}/copy_exectables.sh
 
 # Enable UART on GPIO for Banana Pi zero
 if [ "${BOARD}" = "bananapim2zero" ] ; then
-        ${SCRIPTS}/install_uart3_overlay.sh
+    ${SCRIPTS}/install_uart3_overlay.sh
 fi
 
 # Configure services 
 ${SCRIPTS}/configure_services.sh
 
 # Set root password
-${SCRIPTS}/set_passwords.sh
+if [ "${SETPASSWORDS}" = "true" ] ; then
+    ${SCRIPTS}/set_passwords.sh
+fi
 
 # Enable AP mode by default
-#${SCRIPTS}/../executables/system/wifi_mode.sh ap
+if [ ${APMODE} = "true" ]; then
+    ${SCRIPTS}/../executables/system/wifi_mode.sh ap
+fi
 
 # Install Soundmodem
 #/tmp/overlay/install_soundmodem.sh
@@ -73,4 +83,3 @@ ${SCRIPTS}/set_passwords.sh
 
 # Copy direwolf config
 #sudo -u $DEFAULT_USER -H cp /tmp/overlay/direwolf.conf /home/$DEFAULT_USER
-
