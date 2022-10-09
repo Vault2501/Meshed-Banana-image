@@ -1,0 +1,83 @@
+[reticulum]
+  enable_transport = True 
+  share_instance = Yes
+  shared_instance_port = 37428
+  instance_control_port = 37429
+  panic_on_interface_error = No
+
+[logging]
+  loglevel = 4
+
+[interfaces]
+  
+  [[Default Interface]]
+    type = AutoInterface
+    interface_enabled = True
+
+[[RNode LoRa Interface169]]
+  type = RNodeInterface
+
+  # Enable interface if you want use it!
+  interface_enabled = True
+
+  # Serial port for the device
+  port = /dev/ttyUSB0
+
+  # Set frequency to 867.2 MHz
+  frequency = 169450000
+
+  # Set LoRa bandwidth to 125 KHz
+  bandwidth = 41700
+
+  # Set TX power to 14 dBm (for full 500mW @ Rnode169)
+  txpower = 14
+
+  # Select spreading factor 8. Valid
+  # range is 7 through 12, with 7
+  # being the fastest and 12 having
+  # the longest range.
+  spreadingfactor = 8
+
+  # Select coding rate 5. Valid range
+  # is 5 throough 8, with 5 being the
+  # fastest, and 8 the longest range.
+  codingrate = 5
+
+  # You can configure the RNode to send
+  # out identification on the channel with
+  # a set interval by configuring the
+  # following two parameters.
+  # id_callsign = MYCALL-0
+  # id_interval = 600
+
+  # For certain homebrew RNode interfaces
+  # with low amounts of RAM, using packet
+  # flow control can be useful. By default
+  # it is disabled.
+  flow_control = False
+
+# TCP/IP interface to the Dublin Hub
+  [[RNS Testnet Dublin]]
+    type = TCPClientInterface
+    enabled = yes
+    target_host = dublin.connect.reticulum.network
+    target_port = 4965
+
+# TCP/IP interface to the Frankfurt Hub
+  [[RNS Testnet Frankfurt]]
+    type = TCPClientInterface
+    enabled = yes
+    target_host = frankfurt.connect.reticulum.network
+    target_port = 5377
+
+# Interface to I2P Hub A
+  [[RNS Testnet I2P Hub A]]
+    type = I2PInterface
+    enabled = yes
+    peers = mrwqlsioq4hoo2lmeeud7dkfscnm7yxak7dmiyvsrnpfag3z5tsq.b32.i2p
+
+# Interface to I2P Hub B
+  [[RNS Testnet I2P Hub B]]
+    type = I2PInterface
+    enabled = yes
+    peers = iwoqtz22dsr73aemwpw7guocplsjjoamyl7sogj33qtcd6ds4mza.b32.i2p

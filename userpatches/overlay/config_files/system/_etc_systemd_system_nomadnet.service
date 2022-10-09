@@ -1,0 +1,12 @@
+[Unit]
+Description=nomadnet
+After=rnsd.service
+
+[Service]
+Type=forking
+User=nomad
+ExecStart=screen -dmS nomad bash -c 'sleep 15; /home/nomad/.local/bin/nomadnet;' 
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
