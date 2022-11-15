@@ -3,7 +3,7 @@
 echo "\nRunning ${0}\n"
 
 USER=${1:-rnsd}
-GROUPS=${2:-"dialout cdrom floppy audio video plugdev users sudo"}
+GROUPS=${2:-"tty dialout cdrom floppy audio video plugdev users sudo"}
 
 if $(useradd -m -s /bin/bash ${USER}); then 
     echo "Created user ${USER}"

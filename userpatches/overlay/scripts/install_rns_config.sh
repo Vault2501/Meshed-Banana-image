@@ -11,7 +11,7 @@ echo Board: ${BOARD}
 mkdir -p /home/${USER}/.reticulum
 mkdir -p /home/${USER}/.nomadnetwork/storage/pages
 
-if [ ${BOARD} = bananapim2zero ]; then
+if [ ${BOARD} = "bananapim2zero" ]; then
     cp ${CONFIG}/reticulum.config.bPizero /home/${USER}/.reticulum/config
     cp ${CONFIG}/index.mu.default /home/${USER}/.nomadnetwork/storage/pages/index.mu
 else
