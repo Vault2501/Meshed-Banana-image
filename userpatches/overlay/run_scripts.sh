@@ -10,8 +10,16 @@ SCRIPTS="${SCRIPT_DIR}/scripts"
 USER="${DEFAULT_USER:=nomad}"
 BOARD="${BOARD:=bananapim2zero}"
 
-echo Board: ${BOARD}
-echo User: ${USER}
+echo BOARD: $BOARD
+echo USER: $USER
+
+# temporarily disable ipv6
+sysctl -w net.ipv6.conf.all.disable_ipv6=1
+sysctl -w net.ipv6.conf.default.disable_ipv6=1
+
+# set hostname to avoid warnings
+hostname ubuntu
+echo "127.0.0.1 ubuntu" >> /etc/hosts
 
 # Add user
 ${SCRIPTS}/create_user.sh ${USER}
@@ -31,43 +39,58 @@ sudo -u ${USER} -H bash -e ${SCRIPTS}/install_python_modules.sh
 # Copy reticulum/nomadnet config
 sudo -u ${USER} -H ${SCRIPTS}/install_rns_config.sh ${BOARD}
 
-# Copy the user dir to skel to make it available for new users
-if [ ${COPYSKEL} = "true" ]; then
-    ${SCRIPTS}/copy_skel.sh ${USER}
-fi
+# Install lxmf distributuin group config
+sudo -u ${USER} -H ${SCRIPTS}/install_distribution_group.sh ${USER}
 
+# Install nexus
+sudo -u ${USER} -H ${SCRIPTS}/install_nexus.sh ${USER}
+
+# Install rnodeconf offline flash fix 
+#sudo -u ${USER} -H ${SCRIPTS}/install_rnodeconf_fix.sh ${USER}
+
+# Install upspack_v3
+sudo -u ${USER} -H ${SCRIPTS}/install_upspack.sh ${USER}
+
+# Copy media files 
+sudo -u ${USER} -H ${SCRIPTS}/install_media.sh ${USER}
+
+# Copy desktop config 
+sudo -u ${USER} -H ${SCRIPTS}/install_desktop_config.sh ${USER}
+
+# Copy x11 autostartup script, disabling composite
+sudo -u ${USER} -H ${SCRIPTS}/install_x11vnc_speedup.sh
+
+# Copy the user dir to skel to make it available for new users
+#${SCRIPTS}/copy_skel.sh ${USER}
 
 # Remove user again
-if [ ${REMOVEUSER} = "true" ]; then
-    ${SCRIPTS}/remove_user.sh ${USER}
-fi
+#${SCRIPTS}/remove_user.sh ${USER}
 
 # Add default groups to newly created users
 ${SCRIPTS}/add_default_groups.sh
-
-# Copy system wide configs
-${SCRIPTS}/copy_system_config.sh ${USER}
 
 # Copy system wide executables
 ${SCRIPTS}/copy_exectables.sh
 
 # Enable UART on GPIO for Banana Pi zero
 if [ "${BOARD}" = "bananapim2zero" ] ; then
-    ${SCRIPTS}/install_uart3_overlay.sh
+        ${SCRIPTS}/install_uart3_overlay.sh
 fi
+
+# Set root password
+${SCRIPTS}/set_passwords.sh
+
+# Install raspap
+${SCRIPTS}/install_raspap.sh
+
+# Copy system wide configs
+${SCRIPTS}/copy_system_config.sh ${USER}
 
 # Configure services 
 ${SCRIPTS}/configure_services.sh
 
-# Set root password
-if [ "${SETPASSWORDS}" = "true" ] ; then
-    ${SCRIPTS}/set_passwords.sh
-fi
-
 # Enable AP mode by default
-if [ ${APMODE} = "true" ]; then
-    ${SCRIPTS}/../executables/system/wifi_mode.sh ap
-fi
+#${SCRIPTS}/../executables/system/wifi_mode.sh ap
 
 # Install Soundmodem
 #/tmp/overlay/install_soundmodem.sh
@@ -83,3 +106,4 @@ fi
 
 # Copy direwolf config
 #sudo -u $DEFAULT_USER -H cp /tmp/overlay/direwolf.conf /home/$DEFAULT_USER
+
