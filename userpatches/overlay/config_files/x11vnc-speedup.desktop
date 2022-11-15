@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.9.4
+Type=Application
+Name=x11vnc-speedup
+Comment=disable composition
+Exec=/home/nomad/.local/bin/x11vnc_speedup.sh
+OnlyShowIn=XFCE;
+RunHook=0
+StartupNotify=false
+Terminal=false
+Hidden=false

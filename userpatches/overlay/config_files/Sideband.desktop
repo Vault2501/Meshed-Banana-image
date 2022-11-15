@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Sideband
+Comment=Sideband Communicator
+Exec=/home/nomad/.local/bin/sideband
+Icon=pda
+Path=
+Terminal=false
+StartupNotify=false

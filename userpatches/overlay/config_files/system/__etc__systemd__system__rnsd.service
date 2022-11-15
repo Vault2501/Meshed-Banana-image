@@ -1,0 +1,11 @@
+[Unit]
+Description=RNS Server
+After=network.target
+
+[Service]
+Type=simple
+User=nomad
+ExecStart=bash -c 'sleep 5; /home/nomad/.local/bin/rnsd;'
+
+[Install]
+WantedBy=multi-user.target
